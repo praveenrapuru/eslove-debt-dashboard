@@ -20,10 +20,14 @@ export default function AgentDashboard() {
 
   const loadAgentData = async () => {
     const allCases = await mockDataService.getCases();
+    console.log("Agent name:", user.name);
+    console.log("All cases:", allCases.length);
+
     // TODO: filter by agent ID instead of name
     const myCases = allCases.filter(c => c.agentName === user.name);
 
     console.log("My cases:", myCases.length);
+    console.log("Cases:", myCases);
 
     const totalCases = myCases.length;
     const resolvedCases = myCases.filter(c => c.status === "RESOLVED").length;
@@ -38,7 +42,7 @@ export default function AgentDashboard() {
       followUpCases
     });
 
-    setRecentCases(myCases.slice(0, 5));
+    setRecentCases(myCases.slice(0, 10));
   };
 
   return (
@@ -105,6 +109,7 @@ export default function AgentDashboard() {
                   <th className="pb-3 font-semibold">Amount</th>
                   <th className="pb-3 font-semibold">Status</th>
                   <th className="pb-3 font-semibold">Created</th>
+                  <th className="pb-3 font-semibold">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -130,6 +135,14 @@ export default function AgentDashboard() {
                     </td>
                     <td className="text-gray-600">
                       {new Date(caseItem.createdAt).toLocaleDateString()}
+                    </td>
+                    <td>
+                      <button
+                        onClick={() => navigate("/cases")}
+                        className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                      >
+                        View
+                      </button>
                     </td>
                   </tr>
                 ))}
