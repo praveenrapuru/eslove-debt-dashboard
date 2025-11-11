@@ -5,6 +5,7 @@ class MockDataService {
       { id: 1, name: "Ravi Kumar", email: "ravi@example.com", cases: 5, recovery: 72 },
       { id: 2, name: "Priya Patel", email: "priya@example.com", cases: 8, recovery: 68 },
       { id: 3, name: "Arun Jain", email: "arun@example.com", cases: 4, recovery: 50 },
+      { id: 4, name: "Agent User", email: "agent@demo.com", cases: 6, recovery: 65 },
     ];
 
     this.cases = Array.from({ length: 25 }).map((_, i) => ({
@@ -13,8 +14,8 @@ class MockDataService {
       phone: ["+91 98765 43210", "+91 98765 43211", "+91 98765 43212", "+91 98765 43213", "+91 98765 43214"][i % 5],
       amount: Math.floor(Math.random() * 50000 + 10000),
       status: ["ASSIGNED", "FOLLOW_UP", "RESOLVED", "CLOSED"][i % 4],
-      agentId: (i % 3) + 1,
-      agentName: ["Ravi Kumar", "Priya Patel", "Arun Jain"][i % 3],
+      agentId: (i % 4) + 1,
+      agentName: ["Ravi Kumar", "Priya Patel", "Arun Jain", "Agent User"][i % 4],
       createdAt: new Date(Date.now() - i * 86400000).toISOString(),
       paymentHistory: [
         { date: "2025-10-01", amount: Math.floor(Math.random() * 5000 + 1000), status: "Received", method: "UPI" },

@@ -3,7 +3,6 @@
  * Handles all agent-related API operations
  */
 
-import baseApiService from './baseApiService';
 import mockDataService from './mockData';
 
 class AgentService {

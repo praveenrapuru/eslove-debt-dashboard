@@ -54,15 +54,18 @@ export default function CaseModal({ data, onClose, onUpdate }) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center">
-      <div className="bg-white rounded-lg shadow-lg w-[600px] p-6 relative">
-        <button
-          onClick={onClose}
-          className="absolute right-3 top-2 text-gray-500 text-xl"
-        >
-          ✕
-        </button>
-        <h2 className="text-xl font-semibold mb-3">Case Details</h2>
+    <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center p-4 z-50">
+      <div className="bg-white rounded-lg shadow-lg w-full max-w-[600px] max-h-[90vh] overflow-y-auto relative">
+        <div className="sticky top-0 bg-white border-b p-6 pb-3">
+          <button
+            onClick={onClose}
+            className="absolute right-3 top-3 text-gray-500 text-xl hover:text-gray-700"
+          >
+            ✕
+          </button>
+          <h2 className="text-xl font-semibold">Case Details</h2>
+        </div>
+        <div className="p-6 pt-3">
         <p className="text-gray-600 mb-2">
           <strong>Loan ID:</strong> {data.id}
         </p>
@@ -90,7 +93,7 @@ export default function CaseModal({ data, onClose, onUpdate }) {
 
         {/* Payment History */}
         <h3 className="font-semibold mb-2">Payment History</h3>
-        <div className="border rounded p-3 mb-4 max-h-32 overflow-y-auto bg-gray-50">
+        <div className="border rounded p-3 mb-4 max-h-40 overflow-y-auto bg-gray-50">
           {data.paymentHistory && data.paymentHistory.length > 0 ? (
             <table className="w-full text-sm">
               <thead>
@@ -128,7 +131,7 @@ export default function CaseModal({ data, onClose, onUpdate }) {
         </div>
 
         <h3 className="font-semibold mb-2">Case Timeline</h3>
-        <ul className="border rounded p-2 mb-4 max-h-32 overflow-y-auto">
+        <ul className="border rounded p-2 mb-4 max-h-40 overflow-y-auto bg-gray-50">
           {data.history.map((h, i) => (
             <li key={i} className="text-sm border-b last:border-none py-1">
               <strong>{h.stage}</strong> — {h.note} ({h.date})
@@ -137,9 +140,9 @@ export default function CaseModal({ data, onClose, onUpdate }) {
         </ul>
 
         <h3 className="font-semibold mb-2">Update Status</h3>
-        <div className="flex gap-2 mb-4">
+        <div className="flex flex-col sm:flex-row gap-2 mb-4">
           <select
-            className="border rounded px-3 py-2"
+            className="border rounded px-3 py-2 w-full sm:w-auto"
             value={status}
             onChange={(e) => setStatus(e.target.value)}
           >
@@ -154,11 +157,12 @@ export default function CaseModal({ data, onClose, onUpdate }) {
             onChange={(e) => setNote(e.target.value)}
           />
           <button
-            className="bg-blue-600 text-white px-4 rounded"
+            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 whitespace-nowrap"
             onClick={addNote}
           >
             Save
           </button>
+        </div>
         </div>
       </div>
     </div>

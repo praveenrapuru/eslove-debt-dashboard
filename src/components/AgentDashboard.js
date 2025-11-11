@@ -1,7 +1,8 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import mockDataService from "../services/mockData";
+import CaseModal from "./CaseModal";
 
 export default function AgentDashboard() {
   const navigate = useNavigate();
@@ -13,9 +14,11 @@ export default function AgentDashboard() {
     followUpCases: 0,
   });
   const [recentCases, setRecentCases] = useState([]);
+  const [selectedCase, setSelectedCase] = useState(null);
 
   useEffect(() => {
     loadAgentData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const loadAgentData = async () => {
@@ -43,6 +46,12 @@ export default function AgentDashboard() {
     });
 
     setRecentCases(myCases.slice(0, 10));
+  };
+
+  const handleCaseUpdate = async (updatedCase) => {
+    await mockDataService.updateCase(updatedCase.id, updatedCase);
+    setSelectedCase(null);
+    loadAgentData(); // Reload data to refresh stats and case list
   };
 
   return (
@@ -138,10 +147,10 @@ export default function AgentDashboard() {
                     </td>
                     <td>
                       <button
-                        onClick={() => navigate("/cases")}
+                        onClick={() => setSelectedCase(caseItem)}
                         className="text-blue-600 hover:text-blue-800 text-sm font-medium"
                       >
-                        View
+                        View Details
                       </button>
                     </td>
                   </tr>
@@ -209,6 +218,14 @@ export default function AgentDashboard() {
         </div>
       </div>
       </div>
+
+      {selectedCase && (
+        <CaseModal
+          data={selectedCase}
+          onClose={() => setSelectedCase(null)}
+          onUpdate={handleCaseUpdate}
+        />
+      )}
     </div>
   );
 }
