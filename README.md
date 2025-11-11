@@ -73,6 +73,10 @@ Performance optimizations added:
 - `npm test` - Launches the test runner
 - `npm run build` - Builds the app for production
 
-## License
+## Production Link
 
-MIT
+Live Demo: [https://eslove-debt-dashboard.vercel.app](https://eslove-debt-dashboard.vercel.app)
+
+## Demo Video
+
+Google Drive Link: [https://drive.google.com/file/d/11w6i-nGU6cR-S0aZZEq202LaoOg5kCz8/view?usp=sharing](https://drive.google.com/file/d/11w6i-nGU6cR-S0aZZEq202LaoOg5kCz8/view?usp=sharing)
